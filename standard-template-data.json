@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "version": "1.2.0",
-    "generatedAt": "2026-09-17T02:40:30.485948832Z",
+    "version": "1.3.0",
+    "generatedAt": "2026-09-17T02:43:52.876486852Z",
     "templateType": "trip_e",
     "propertyId": "05b1a302-e9ad-4fa2-9b27-83387380a67a",
     "homepageId": "1243235a-ef9f-4da3-87d4-cf31d1c25bf4"
@@ -29,6 +29,9 @@
     "domain": "jaycube.co.kr",
     "realtimeBookingId": "https://booking.naver.com/booking/3/bizes/1677891",
     "ybsId": "76065",
+    "tripPropertyId": "11807",
+    "partnerType": "distributor_b",
+    "tripProviderName": "",
     "amenities": [
       "흡연구역(지정장소)",
       "주차장"
@@ -374,9 +377,7 @@
         "surrounding": [ ],
         "commonArea": [ ]
       }
-    ],
-    "tripPropertyId": "11807",
-    "partnerType": "distributor_b"
+    ]
   },
   "rooms": [
     {
