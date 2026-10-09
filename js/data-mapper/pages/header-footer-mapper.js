@@ -35,6 +35,7 @@
     this.mapBookingLinks();
     this.mapYbsButton();
     this.mapConsult();
+    this.mapSocialLinks();
     this.mapRoomMenu();
     this.mapFacilityMenu();
     this.mapFooterMenu();
@@ -186,6 +187,50 @@
     });
   };
 
+  // 소셜 링크 플랫폼 — [data-homepage-socialLinks-{platform}] 와 1:1.
+  // 헤더 네이버 버튼은 blog 칸을 쓴다(어드민에서 네이버 플레이스 주소를 blog 에 입력).
+  var SOCIAL_PLATFORMS = ['facebook', 'instagram', 'blog', 'youtube'];
+
+  // MAPPER: homepage.socialLinks.{platform} → [data-homepage-socialLinks-{platform}] (href, 없으면 숨김)
+  //
+  // 값이 있으면 href + 노출, 없으면(null·빈 문자열·공백·키 없음) 숨긴다.
+  // 마크업은 매핑 전 깜빡임이 없도록 `.hidden-social-link`(숨김) 상태로 시작한다.
+  // 버튼을 감싸는 [data-social-wrap] 은 안에 보이는 버튼이 없으면 래퍼째 숨긴다.
+  // E형 헤더 마크업은 blog·instagram 두 개(PC #shGnb · 모바일 #topmenuM) — facebook / youtube 는 매칭 요소 0개.
+  // 헤더에 버튼이 하나라도 보이면 루트에 data-social="on" 을 찍는다 — PC 대메뉴 여백을 줄이는 CSS 기준
+  // (:has 대신 — 일부 브라우저에서 스타일 미반영).
+  HeaderFooterMapper.prototype.mapSocialLinks = function () {
+    var socialLinks = this.getHomepage().socialLinks || {};
+    var headerOn = false;
+    SOCIAL_PLATFORMS.forEach(function (platform) {
+      var url = consultText(socialLinks[platform]);
+      document.querySelectorAll('[data-homepage-socialLinks-' + platform + ']').forEach(function (el) {
+        if (!url) {
+          el.classList.add('hidden-social-link');
+          el.setAttribute('href', '#!');
+          el.removeAttribute('target');
+          el.removeAttribute('rel');
+          return;
+        }
+        el.setAttribute('href', url);
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener');
+        el.classList.remove('hidden-social-link');
+        if (el.closest('#sh_hd')) headerOn = true;
+      });
+    });
+    document.querySelectorAll('[data-social-wrap]').forEach(function (wrap) {
+      var visible = wrap.querySelector(
+        '[data-homepage-socialLinks-facebook]:not(.hidden-social-link),' +
+        '[data-homepage-socialLinks-instagram]:not(.hidden-social-link),' +
+        '[data-homepage-socialLinks-blog]:not(.hidden-social-link),' +
+        '[data-homepage-socialLinks-youtube]:not(.hidden-social-link)'
+      );
+      wrap.classList.toggle('hidden-social-link', !visible);
+    });
+    document.documentElement.setAttribute('data-social', headerOn ? 'on' : 'off');
+  };
+
   // 상담 URL 에 쓸 tripPropertyId. 없거나 형식이 아니면 빈 문자열.
   HeaderFooterMapper.prototype.getConsultId = function () {
     var raw = consultText(this.getProperty().tripPropertyId);
@@ -253,6 +298,7 @@
         var a = document.createElement('a');
         a.href = self.getRoomMenuLink(item, 'id');
         a.textContent = name;
+        a.title = name; // 말줄임될 때 전체 객실명을 툴팁으로
         li.appendChild(a);
         container.appendChild(li);
       });
@@ -277,6 +323,7 @@
         var a = document.createElement('a');
         a.href = 'facility.html?id=' + f.id;
         a.textContent = f.name;
+        a.title = f.name;
         li.appendChild(a);
         target.appendChild(li);
       });
