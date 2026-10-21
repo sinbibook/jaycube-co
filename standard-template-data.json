@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "version": "1.4.0",
-    "generatedAt": "2026-10-09T12:42:55.812383882Z",
+    "version": "1.5.0",
+    "generatedAt": "2026-10-21T01:12:04.508535233Z",
     "templateType": "trip_e",
     "propertyId": "05b1a302-e9ad-4fa2-9b27-83387380a67a",
     "homepageId": "1243235a-ef9f-4da3-87d4-cf31d1c25bf4"
@@ -1982,8 +1982,8 @@
                 "title": "ROOM PREVIEW",
                 "images": [
                   {
-                    "id": "cb999e44-d9e1-46c9-ac01-16f2ec982751",
-                    "url": "https://jaycube.co.kr/assets/images/room/layout.webp",
+                    "id": "01a15c03-eafb-7306-896c-8c0a1ba69a56",
+                    "url": "https://jlnjajtcnyqupfaqjerz.supabase.co/storage/v1/object/public/app-images/homepage/1243235a-ef9f-4da3-87d4-cf31d1c25bf4/layout_map_about/1792545122657-jhjy2aqph8.jpg",
                     "sortOrder": 0,
                     "description": "",
                     "isSelected": true,
@@ -1995,6 +1995,9 @@
               "enabled": true
             }
           ]
+        },
+        "landing": {
+          "sections": [ ]
         }
       },
       "popup": {
@@ -2014,6 +2017,7 @@
               }
             ],
             "slider": false,
+            "videos": [ ],
             "enabled": true,
             "endDate": null,
             "sortOrder": 0,
@@ -2986,7 +2990,10 @@
           ],
           "nameEn": ""
         }
-      ]
+      ],
+      "footer": {
+        "ruralStayMark": null
+      }
     }
   }
 }
